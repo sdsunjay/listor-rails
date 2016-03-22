@@ -7,6 +7,7 @@ class CreateCandidates < ActiveRecord::Migration
       t.integer :status
       t.text :comments
       t.integer :company_id
+      t.integer :user_id
 
       t.timestamps null: false
     end

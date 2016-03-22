@@ -1,0 +1,36 @@
+<%= render 'partials/alerts' %>
+
+<!-- 'access_level' must be set to 1 or 2 to view this page -->
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="page-sub-title textcenter">
+        </div><!-- end .page-sub-title -->
+      </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+      <% if @users.exists? %>
+            <table class="table table-striped">
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Create Date </th>
+                  <th>Sign In Count </th>
+              </tr>
+              <% @users.each do |user| %>
+                <tr>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.created_at.to_time.strftime('%B %e at %l:%M %p' ) %></td>
+                    <td><%= user.sign_in_count %></td>
+                </tr>
+            <% end %>
+            </table>
+            <%= will_paginate @users %>
+            <% else %>
+                <p>There are no users</p>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

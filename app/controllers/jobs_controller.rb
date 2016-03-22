@@ -2,7 +2,6 @@ class JobsController < ApplicationController
 
   before_action :set_job, only: [:show, :edit, :update, :destroy, :connect]
   before_action :authenticate_user!, except: [:index]
-  before_action :ensure_signup_complete, except: [:index]
 
   def index
 #    if(params.has_key?(:status) || params.has_key?(:company)
@@ -17,11 +16,11 @@ class JobsController < ApplicationController
 
   def new
     @page_title = 'Add job'
-    @job = current_user.posts.build
+    @job = current_user.jobs.build
   end
 
   def create
-    @job = current_user.jobss.build(post_params)
+    @job = current_user.jobs.build(job_params)
     @job.user_id = current_user.id
 
     # Save the job

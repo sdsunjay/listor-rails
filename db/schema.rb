@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160322030213) do
     t.integer  "status"
     t.text     "comments"
     t.integer  "company_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

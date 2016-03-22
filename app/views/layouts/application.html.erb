@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RBlog</title>
+  <title>Listor</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -16,13 +16,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><h1>rBlog</h1></a>
+          <a class="navbar-brand" href="/"><h1>Listor</h1></a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-              <li <%= link_to 'Home', root_path %></li>
-              <li class="<%= params[:controller] == 'candidates' ? 'active' : ''%>"><%= link_to 'My Candidate', candidate_path %></li>
-              <li class="<%= params[:controller] == 'jobs' ? 'active' : ''%>"><%= link_to 'My Jobs', job_path %></li>
+              <li> <%= link_to 'Home', root_path %></li>
+            <% if user_signed_in? %>
+                <li><%= link_to 'My Profile', current_user, class: 'less-padding' %></li>
+                <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'less-padding' %></li>
+            <% else %>
+                <li><%= link_to 'Sign In', new_user_session_path, class: 'less-padding' %></li>
+                <li><%= link_to 'Sign Up', new_user_registration_path, class: 'less-padding' %></li>
+            <% end %>
+
+              <li class="<%= params[:controller] == 'candidates' ? 'active' : ''%>"><%= link_to 'My Candidates', candidates_path %></li>
+              <li class="<%= params[:controller] == 'jobs' ? 'active' : ''%>"><%= link_to 'My Jobs', jobs_path %></li>
           </ul>
         
       </div><!--/.nav-collapse -->

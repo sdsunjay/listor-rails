@@ -1,0 +1,39 @@
+<%= render 'partials/alerts' %>
+
+<!-- 'access_level' must be set to 1 or 2 to view this page -->
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="page-sub-title textcenter">
+          <h2 class="page-header">Manage Candidates <%= link_to 'Create New',  new_candidate_path, class:'btn btn-success pull-right'%></h2> 
+        </div><!-- end .page-sub-title -->
+      </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+      <% if @candidates.exists? %>
+            <table class="table table-striped">
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Create Date </th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+              </tr>
+              <% @candidates.each do |candidate| %>
+                <tr>
+                    <td><%= candidate.name %></td>
+                    <td><%= candidate.email %></td>
+                    <td><%= candidate.created_at.to_time.strftime('%B %e at %l:%M %p' ) %></td>
+                   <td><%= link_to 'Edit', edit_candidate_path(candidate), class: 'btn btn-primary' %></td>
+                   <td><%= link_to 'Delete', candidate_path(candidate), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
+                </tr>
+            <% end %>
+            </table>
+            <%= will_paginate @candidates %>
+            <% else %>
+                <p>There are no candidates</p>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

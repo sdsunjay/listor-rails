@@ -1,0 +1,14 @@
+<h1> User profile page </h1>
+<% if @jobs.exists? %>
+    <% @jobs.each do |job| %>
+        <%= job.title %>
+    <% end %>
+<% else %> 
+<p> You have no active jobs </p>
+<% end %>
+<% if @submissions.exists? %>
+    <% @submissions.each do |submission| %>
+    <% end %>
+<% else %>
+<p> You have no active submissions </p>
+<% end %>

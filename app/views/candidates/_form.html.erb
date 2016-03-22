@@ -1,16 +1,13 @@
-<%= form_for([@user, @job], html: {class: "comment-form"}) do |f| %>
+<%= form_for([@user, @candidate], html: {class: "comment-form"}) do |f| %>
     <%= render 'form_error', resource: f.object %>
     <div class="form-group">
-        <%= f.text_field :title, class: 'form-control', placeholder: 'Title' %>
+        <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
     </div>
     <div class="form-group">
-        <%= f.text_area :description, class: 'form-control', placeholder: 'Description' %>
+        <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
     </div>
     <div class="form-group">
-        <%= f.number_field :salary, class: 'form-control', placeholder: 'Salary' %>
-    </div>
-    <div class="form-group">
-        <%= f.text_area :notes, class: 'form-control', placeholder: 'Notes' %>
+        <%= f.telephone_field :phone, class: 'form-control', placeholder: 'Telephone Number' %>
     </div>
      <div class="form-group">
         <%= f.select :company_id, Company.all.collect {|x| [x.name, x.id]}, {include_blank: 'Select Company'}, class:'form-control' %><br />
@@ -19,6 +16,6 @@
         <span>SUBMIT</span>
     <% end %>
     <!-- <div class="col-xs-12 col-sm-6 format-padding-left">
-      <%=link_to 'Cancel', companies_path, class:'btn btn-lg gray-color' %>
+      <%=link_to 'Cancel', candidates_path, class:'btn btn-lg gray-color' %>
   </div> -->
   <% end %>

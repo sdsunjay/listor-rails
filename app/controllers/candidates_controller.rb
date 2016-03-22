@@ -1,11 +1,10 @@
 class CandidatesController < ApplicationController
 
-  before_action :authenticate_user!, except: [:index]
-  before_action :ensure_signup_complete, except: [:index]
+ before_action :authenticate_user!
+ before_action :set_candidate, only: [:show, :edit, :update]
 
   def index
       @candidates = Candidate.all.order(created_at: :desc).paginate(per_page: 10, page: params[:page])
-    end
   end
 
   def show
@@ -17,7 +16,7 @@ class CandidatesController < ApplicationController
   end
 
   def create
-    @candidate = current_user.candidatess.build(candidate_params)
+    @candidate = current_user.candidates.build(candidate_params)
     @candidate.user_id = current_user.id
 
     # Save the candidate
