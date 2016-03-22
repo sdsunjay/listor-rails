@@ -1,0 +1,14 @@
+<%= form_for @company, html: {class: "comment-form"} do |f| %>
+    <%= render 'form_error', resource: f.object %>
+    <div class="form-group">
+        <%= f.text_field :city_name, class: 'form-control', placeholder: 'Name' %>
+    </div>
+    <div class="form-group">
+        <%= f.text_field :state_name, class: 'form-control', placeholder: 'City' %>
+    </div>
+    <%= f.button :submit, class:'button button-default', 'data-text': 'SUBMIT' do %>
+        <span>SUBMIT</span>
+    <% end %>
+    <!-- <div class="col-xs-12 col-sm-6 format-padding-left">
+      <%=link_to 'Cancel', companies_path, class:'btn btn-lg gray-color' %>
+    </div> -->

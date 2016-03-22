@@ -1,0 +1,18 @@
+<section style="<% !current_page?(root_path) ? 'background-color: #f8f8f8;' : '' %>">
+    <div class="container">
+        <div class="row">
+            <div class='col-xs-12'>
+                <% if flash[:notice] %>
+                    <div class="alert-content">
+                        <div class="alert alert-success"><%= flash[:notice] %></div>
+                    </div>
+                <% end %>
+                <% if flash[:alert] %>
+                    <div class="alert-content">
+                        <div class="alert alert-danger"><%= flash[:alert] %></div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</section>

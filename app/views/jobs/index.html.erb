@@ -1,0 +1,43 @@
+<%= title "All Jobs" %>
+
+<%= render 'partials/alerts' %>
+
+<!-- 'access_level' must be set to 1 or 2 to view this page -->
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="page-sub-title textcenter">
+          <h2 class="page-header">Manage Jobs <%= link_to 'Create New',  new_job_path, class:'btn btn-success pull-right'%></h2> 
+        </div><!-- end .page-sub-title -->
+      </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+      <% if @users.exists? %>
+            <table class="table table-striped">
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Salary</th>
+                  <th>Notes</th>
+                  <th>Create Date </th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+              </tr>
+              <% @jobs.each do |job| %>
+                <tr>
+                    <td><%= job.title %></td>
+                    <td><%= job.salary %></td>
+                    <td><%= user.created_at.to_time.strftime('%B %e at %l:%M %p' ) %></td>
+                   <td><%= link_to 'Edit', edit_job_path(user), class: 'btn btn-primary' %></td>
+                   <td><%= link_to 'Delete', job_path(user), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
+                </tr>
+            <% end %>
+            </table>
+            <%= will_paginate @jobs %>
+            <% else %>
+                <p>There are no jobs</p>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
