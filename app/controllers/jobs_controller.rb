@@ -1,7 +1,7 @@
 class JobsController < ApplicationController
 
-  before_action :set_job, only: [:show, :edit, :update, :destroy, :connect]
   before_action :authenticate_user!
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :connect]
 
   def index
 #    if(params.has_key?(:status) || params.has_key?(:company)
@@ -12,6 +12,11 @@ class JobsController < ApplicationController
   end
 
   def show
+  end
+  
+  def new
+    @page_title = 'Add job'
+    @job = current_user.jobs.build
   end
 
   def create
