@@ -1,22 +1,17 @@
 class JobsController < ApplicationController
 
   before_action :set_job, only: [:show, :edit, :update, :destroy, :connect]
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
 
   def index
 #    if(params.has_key?(:status) || params.has_key?(:company)
 #      @jobs = Job.search(params[:status], params[:company_id]).order(created_at: :desc).paginate(per_page: 10, page: params[:page])
-    else
-      @jobs = Job.all.order(created_at: :desc).paginate(per_page: 10, page: params[:page])
+#    else
+        setup_jobs
  #   end
   end
 
   def show
-  end
-
-  def new
-    @page_title = 'Add job'
-    @job = current_user.jobs.build
   end
 
   def create
@@ -25,10 +20,12 @@ class JobsController < ApplicationController
 
     # Save the job
     if @job.save
-      flash[:notice] = 'job Created'
+      flash[:notice] = 'Job Created'
       redirect_to root_path
     else
-      render 'new'
+        flash[:notice] = 'Job Not Created'
+        setup_jobs
+        render action: 'index'
     end
   end
 
@@ -86,7 +83,12 @@ class JobsController < ApplicationController
   def set_job
     @job = Job.find(params[:id])
   end
-
+  
+  def setup_jobs
+        @jobs = Job.all.order(created_at: :desc).paginate(per_page: 10, page: params[:page])
+        @job ||= Job.new
+  end
+  
   def job_params
     params
     .require(:job)

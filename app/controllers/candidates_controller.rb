@@ -4,7 +4,7 @@ class CandidatesController < ApplicationController
  before_action :set_candidate, only: [:show, :edit, :update]
 
   def index
-      @candidates = Candidate.all.order(created_at: :desc).paginate(per_page: 10, page: params[:page])
+      setup_candidates 
   end
 
   def show
@@ -21,10 +21,12 @@ class CandidatesController < ApplicationController
 
     # Save the candidate
     if @candidate.save
-      flash[:notice] = 'candidate Created'
-      redirect_to root_path
+      flash[:notice] = 'Candidate Created'
+      redirect_to candidates_path
     else
-      render 'new'
+        flash[:notice] = 'Candidate Not Created'
+        setup_candidates
+        render action: 'index'
     end
   end
 
@@ -58,10 +60,14 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
   end
 
+  def setup_candidates
+        @candidates = Candidate.all.order(created_at: :desc).paginate(per_page: 10, page: params[:page])
+        @candidate ||= Candidate.new
+  end
   def candidate_params
     params
     .require(:candidate)
-    .permit(:name, :email, :status, :comments, :user_id)
+    .permit(:name, :email, :status, :comments, :user_id, job_attributes: [:id], submission_attributes: [:id])
     .merge(user_id: current_user.id)
   end
 end

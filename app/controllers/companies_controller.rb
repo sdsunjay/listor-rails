@@ -1,4 +1,10 @@
 class CompaniesController < ApplicationController
+  before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  
+    def index
+        setup_companies
+  end
 
   def new
     @page_title = 'Add New Company'
@@ -14,7 +20,8 @@ class CompaniesController < ApplicationController
       redirect_to companies_path
     else
       flash[:alert] = "Company Not Created"
-      render 'new'
+      setup_questions
+      render action: 'index'
     end
   end
 
@@ -48,12 +55,18 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def index
-    @companies = Company.all.order(created_at: :desc).paginate(per_page: 10, page: params[:page])
-  end
 
   private
 
+  def setup_companies
+    @companies = Company.all.order(created_at: :desc).paginate(per_page: 10, page: params[:page])
+        @company ||= Company.new
+  end
+  
+  def set_company
+    @company = Company.find(params[:id])
+  end
+  
   def company_params
     params.require(:company).permit(:name, :city, :notes)
   end
