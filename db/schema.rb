@@ -14,15 +14,15 @@
 ActiveRecord::Schema.define(version: 20160322030213) do
 
   create_table "candidates", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
+    t.string   "name",                   null: false
+    t.string   "email",                  null: false
     t.string   "phone"
-    t.integer  "status"
+    t.integer  "status",     default: 0, null: false
     t.text     "comments"
     t.integer  "company_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",                null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "companies", force: :cascade do |t|
