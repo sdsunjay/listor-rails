@@ -16,21 +16,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><h1>Listor</h1></a>
+          <!-- <a class="navbar-brand" href="/"><h1>Listor</h1></a>-->
         </div>
         <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
+         <ul class="nav navbar-nav">
               <li> <%= link_to 'Home', root_path %></li>
-            <% if user_signed_in? %>
-                <li><%= link_to 'My Profile', current_user, class: 'less-padding' %></li>
-                <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'less-padding' %></li>
-            <% else %>
-                <li><%= link_to 'Sign In', new_user_session_path, class: 'less-padding' %></li>
-                <li><%= link_to 'Sign Up', new_user_registration_path, class: 'less-padding' %></li>
-            <% end %>
-
               <li class="<%= params[:controller] == 'candidates' ? 'active' : ''%>"><%= link_to 'My Candidates', candidates_path %></li>
               <li class="<%= params[:controller] == 'jobs' ? 'active' : ''%>"><%= link_to 'My Jobs', jobs_path %></li>
+              <li class="<%= params[:controller] == 'companies' ? 'active' : ''%>"><%= link_to 'My Companies', companies_path %></li>
+        </ul>    
+         <ul class="nav navbar-nav navbar-right">
+            <% if !user_signed_in? %>
+                <li><%= link_to 'Register', new_user_registration_path, class: 'less-padding' %></li>
+                <li><%= link_to 'Sign In', new_user_session_path, class: 'less-padding' %></li>
+            <% else %>
+                <li><%= link_to current_user.name, current_user %></li>
+                <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'less-padding' %></li>
+            <% end %>
+
           </ul>
         
       </div><!--/.nav-collapse -->
@@ -41,12 +44,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-              <% if flash[:notice] %>
-                  <div class="alert alert-success"><%= flash[:notice] %></div>
-              <% end %>
-              <% if flash[:alert] %>
-                  <div class="alert alert-danger"><%= flash[:alert] %></div>
-              <% end %>
                 <%= yield %>
             </div>
             <div class="col-md-4">
