@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def show
               @jobs = Job.where(user_id: @user.id).order(created_at: :desc).paginate(per_page: 10, page: params[:page])
               @submissions = Submission.where(user_id: @user.id).order(created_at: :desc).paginate(per_page: 10, page: params[:page])
+              @submission = Submission.new
   end
   
   def update
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      accessible = [ :name, :email] # extend with your own params
+      accessible = [ :name, :email, :company_id] # extend with your own params
       accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       params.require(:user).permit(accessible)
     end
