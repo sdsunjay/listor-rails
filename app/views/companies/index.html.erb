@@ -3,38 +3,41 @@
 <section class="main-content">
   <div class="container">
     <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <%= render 'form' %>
-        </div>
-     <div class="col-md-6 col-sm-6 col-xs-6">
         <div class="page-sub-title textcenter">
           <h2 class="page-header">Manage Companies <%= link_to 'Create New',  new_company_path, class:'btn btn-success pull-right'%></h2> 
         </div><!-- end .page-sub-title -->
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <h3>New Company</h3>
+            <%= render 'form' %>
+            <br>
+            <br>
+            <h3>New Location</h3>
+            <%= render 'locations/form' %>
+        </div>
+     <div class="col-md-6 col-sm-6 col-xs-6">
       <% if @companies.exists? %>
             <table class="table table-striped">
                 <tr>
-                  <th>Name</th>
-                  <th>City</th>
-                  <th>Create Date </th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-              </tr>
-              <% @companies.each do |company| %>
-                <tr>
-                    <td><%= company.name %></td>
-                    <td><%= company.city %></td>
-                    <td><%= company.created_at.to_time.strftime('%B %e at %l:%M %p' ) %></td>
-                   <td><%= link_to 'Edit', edit_company_path(company), class: 'btn btn-primary' %></td>
-                   <td><%= link_to 'Delete', company_path(company), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
+                    <th>Name</th>
+                    <th>Create Date </th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
-            <% end %>
+                <% @companies.each do |company| %>
+                        <tr>    
+                            <td><%= company.name %></td>
+                            <td><%= company.created_at.to_time.strftime('%B %e at %l:%M %p' ) %></td>
+                            <td><%= link_to 'Edit', edit_company_path(company), class: 'btn btn-primary' %></td>
+                            <td><%= link_to 'Delete', company_path(company), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
+                        </tr>
+                <% end %>
             </table>
             <%= will_paginate @companies %>
-            <% else %>
-                <p>There are no companies</p>
-            <% end %>
-        </div>
-      </div>
+        <% else %>
+            <p>There are no companies</p>
+        <% end %>
+    </div>
+</div>
       </div><!-- end .col-md-6 col-sm-6 col-xs-6 -->
   </div><!-- Closes row -->
 </div><!-- Closes container -->
