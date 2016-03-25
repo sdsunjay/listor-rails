@@ -1,7 +1,13 @@
 <h1> User profile page </h1>
 <% if @jobs.exists? %>
     <% @jobs.each do |job| %>
-        <%= job.title %>
+        <p>Title: <%= job.title %></p>
+        <p>Description: <%= job.description %></p>
+        <p>Candidates:<p>
+        <% job.submissions.each do |candidate| %>
+            <p> Name: <%= candidate.name %></p>
+            <p> Status: <%= candidate.status %></p>
+        <% end %>
     <% end %>
 <% else %> 
 <p> You have no active jobs </p>
@@ -12,3 +18,4 @@
 <% else %>
 <p> You have no active submissions </p>
 <% end %>
+<% render 'submissions/form' %>
