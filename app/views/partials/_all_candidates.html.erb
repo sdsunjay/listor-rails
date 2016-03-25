@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Status</th>
+    <th>Create Date </th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <% @candidates.each do |candidate| %>
+  <tr>
+    <td><%= candidate.name %></td>
+    <td><%= candidate.email %></td>
+    <td><%= candidate.status %></td>
+    <td><%= candidate.created_at.to_time.strftime('%B %e at %l:%M %p' ) %></td>
+    <td><%= link_to 'Edit', edit_candidate_path(candidate), class: 'btn btn-primary' %></td>
+    <td><%= link_to 'Delete', candidate_path(candidate), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
+  </tr>
+  <% end %>
+</table>
