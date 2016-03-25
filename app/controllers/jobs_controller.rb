@@ -1,7 +1,7 @@
 class JobsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_job, only: [:show, :edit, :update, :destroy, :connect]
+  before_action :set_job, only: [:show, :edit, :update, :destroy ]
 
   def index
 #    if(params.has_key?(:status) || params.has_key?(:company)
@@ -58,26 +58,6 @@ class JobsController < ApplicationController
     end
   end
 
-  def connect
-    @submission = Submission.new
-    if @job.status == 'open'
-        @submission.user_id = current_user.id
-        @submission.job_id = @job.id
-        @submission.candidate_id = @candidate.id
-        if @submission.save
-          if @job.save
-            flash[:notice] = 'Candidate added'
-          else
-            flash[:alert] = "Unable to update job"
-          end
-        else
-          flash[:alert] = "Unable to add candidate"
-        end
-      else
-        flash[:alert] = "Job is closed" 
-      end
-    redirect_to jobs_path
-  end
 
   private
 
