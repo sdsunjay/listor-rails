@@ -1,0 +1,43 @@
+<%= render 'partials/alerts' %>
+
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <%= render 'form' %>
+        </div>
+     <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="page-sub-title textcenter">
+          <h2 class="page-header">Manage Locations <%= link_to 'Create New',  new_location_path, class:'btn btn-success pull-right'%></h2> 
+        </div><!-- end .page-sub-title -->
+      <% if @locations.exists? %>
+            <table class="table table-striped">
+                <tr>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Zip</th>
+                  <th>Create Date </th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+              </tr>
+              <% @locations.each do |location| %>
+                <tr>
+                    <td><%= location.city %></td>
+                    <td><%= location.state %></td>
+                    <td><%= location.zip %></td>
+                    <td><%= location.created_at.to_time.strftime('%B %e at %l:%M %p' ) %></td>
+                   <td><%= link_to 'Edit', edit_location_path(location), class: 'btn btn-primary' %></td>
+                   <td><%= link_to 'Delete', location_path(location), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
+                </tr>
+            <% end %>
+            </table>
+            <%= will_paginate @locations %>
+            <% else %>
+                <p>There are no locations</p>
+            <% end %>
+        </div>
+      </div>
+      </div><!-- end .col-md-6 col-sm-6 col-xs-6 -->
+  </div><!-- Closes row -->
+</div><!-- Closes container -->
+</section>
