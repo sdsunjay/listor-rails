@@ -5,7 +5,6 @@ class CreateJobs < ActiveRecord::Migration
       t.integer :user_id
       t.text :description
       t.integer :salary
-      t.text :notes
       t.integer :company_id
       t.integer :candidate_id
       t.integer :status
