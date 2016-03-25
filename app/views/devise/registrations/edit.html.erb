@@ -2,11 +2,18 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
+  
+  <div class="field">
+    <%= f.text_field :name, autofocus: true, placeholder: 'Name', class: 'form-control'   %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email %>
   </div>
+     <div class="field">
+        <%= f.select :company_id, Company.all.collect {|x| [x.name, x.id]}, {include_blank: 'Select Company'}, class:'form-control' %><br />
+    </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
