@@ -1,43 +1,36 @@
 <%= render 'partials/alerts' %>
 
+
 <section class="main-content">
-  <div class="container">
-    <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <%= render 'form' %>
-        </div>
-     <div class="col-md-6 col-sm-6 col-xs-6">
+    <div class="container">
         <div class="page-sub-title textcenter">
-          <h2 class="page-header">Manage Candidates <%= link_to 'Create New',  new_candidate_path, class:'btn btn-success pull-right'%></h2> 
+            <h2 class="page-header">Manage Candidates <%= link_to 'Create New',  new_candidate_path, class:'btn btn-success pull-right'%></h2>
         </div><!-- end .page-sub-title -->
-      <% if @candidates.exists? %>
-            <table class="table table-striped">
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Status</th>
-                  <th>Create Date </th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-              </tr>
-              <% @candidates.each do |candidate| %>
-                <tr>
-                    <td><%= candidate.name %></td>
-                    <td><%= candidate.email %></td>
-                    <td><%= candidate.status %></td>
-                    <td><%= candidate.created_at.to_time.strftime('%B %e at %l:%M %p' ) %></td>
-                   <td><%= link_to 'Edit', edit_candidate_path(candidate), class: 'btn btn-primary' %></td>
-                   <td><%= link_to 'Delete', candidate_path(candidate), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
-                </tr>
-            <% end %>
-            </table>
-            <%= will_paginate @candidates %>
-            <% else %>
-                <p>There are no candidates</p>
-            <% end %>
-        </div>
-      </div>
-      </div><!-- end .col-md-6 col-sm-6 col-xs-6 -->
-  </div><!-- Closes row -->
-</div><!-- Closes container -->
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-3">
+                <h3>Needs Approval</h3>
+                <% if @candidates.exists? %>
+                    <%= render @candidates.select { |c| c.status == 'needs_approval' } %>
+                <% end %>
+            </div><!-- end .col-md-6 col-sm-6 col-xs-6 -->
+            <div class="col-md-3 col-sm-3 col-xs-3">
+                <h3>Needs Feedback</h3>
+                <% if @candidates.exists? %>
+                    <%= render @candidates.select { |c| c.status == 'needs_feedback' } %>
+                <% end %>
+            </div><!-- end .col-md-6 col-sm-6 col-xs-6 -->
+            <div class="col-md-3 col-sm-3 col-xs-3">
+                <h3>Needs Interview</h3>
+                <% if @candidates.exists? %>
+                    <%= render @candidates.select { |c| c.status == 'needs_interview' } %>
+                <% end %>
+            </div><!-- end .col-md-6 col-sm-6 col-xs-6 -->
+            <div class="col-md-3 col-sm-3 col-xs-3">
+                <h3>Final Stages</h3>
+                <% if @candidates.exists? %>
+                    <%= render @candidates.select { |c| c.status == 'final stages' } %>
+                <% end %>
+            </div><!-- end .col-md-6 col-sm-6 col-xs-6 -->
+        </div><!-- Closes row -->
+    </div><!-- Closes container -->
 </section>
