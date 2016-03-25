@@ -1,0 +1,21 @@
+<%= form_for(@submission, class: 'comment-form') do |f| %>
+
+            <%= render 'form_error', resource: f.object %>
+
+    <%= render 'form_error', resource: f.object %>
+     <div class="form-group">
+        <%= f.select :job_id, Job.all.collect {|x| [x.title, x.id]}, {include_blank: 'Select Job'}, class:'form-control' %><br />
+    </div>
+     <div class="form-group">
+        <%= f.select :candidate_id, Candidate.all.collect {|x| [x.name, x.id]}, {include_blank: 'Select Candidate'}, class:'form-control' %><br />
+    </div>
+    <div class="form-group">
+        <%= f.select :status, options_for_select([['Needs Approval', 'needs_approval'], ['Needs Feedback', 'needs_feedback'], ['Needs Interview', 'needs_interview'], ['Final Stages', 'final_stages']]) ,{include_blank: 'Select Status'}, class: 'form-control' %>
+    </div>
+    <%= f.button :submit, class:'button button-default', 'data-text': 'SUBMIT' do %>
+        <span>SUBMIT</span>
+    <% end %>
+    <!-- <div class="col-xs-12 col-sm-6 format-padding-left">
+      <%=link_to 'Cancel', companies_path, class:'btn btn-lg gray-color' %>
+  </div> -->
+  <% end %>
