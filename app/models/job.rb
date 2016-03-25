@@ -1,5 +1,5 @@
 class Job < ActiveRecord::Base
-  
+  has_many :notes, dependent: :destroy  
   has_many :submissions
   has_many :candidates, through: :submissions
   accepts_nested_attributes_for :submissions
