@@ -1,0 +1,30 @@
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.wysihtml5').each(function(i, elem) {
+      $(elem).wysihtml5();
+    });
+  })
+$(document).on('page:load', function(){
+  window['rangy'].initialized = false
+})
+</script>
+
+<%= form_for([@user, @note], html: {class: "comment-form"}) do |f| %>
+    <%= render 'form_error', resource: f.object %>
+    <div class="form-group">
+        <%= f.text_field :title, class: 'form-control', placeholder: 'Title' %>
+    </div>
+    <div class="form-group">
+        <%= f.text_area :body, class: 'wysihtml5 form-control', placeholder: 'Description' %>
+    </div>
+     <div class="form-group">
+        <%= f.select :candidate_id, Candidate.all.collect {|x| [x.name, x.id]}, {include_blank: 'Select Candidate'}, class:'form-control' %><br />
+    </div>
+    <%= f.button :submit, class:'button button-default', 'data-text': 'SUBMIT' do %>
+        <span>SUBMIT</span>
+    <% end %>
+    <!-- <div class="col-xs-12 col-sm-6 format-padding-left">
+      <%=link_to 'Cancel', companies_path, class:'btn btn-lg gray-color' %>
+  </div> -->
+  <% end %>
