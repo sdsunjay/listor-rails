@@ -6,10 +6,13 @@
   <div class="form-group">
     <%= f.text_field :name, autofocus: true, placeholder: 'Name', class: 'form-control'   %>
   </div>
-
   <div class="form-group">
-    <%= f.email_field :email, autofocus: true, placeholder: 'Email', class: 'form-control' %>
+    <%= f.email_field :email, placeholder: 'Email', class: 'form-control' %>
   </div>
+     <div class="form-group">
+        <%= f.select :company_id, Company.all.collect {|x| [x.name, x.id]}, {include_blank: 'Select Company'}, class:'form-control' %><br />
+    </div>
+
 
   <div class="form-group">
     <% if @minimum_password_length %>

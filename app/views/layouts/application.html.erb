@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Listor</title>
+   <title>Listor</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -24,6 +24,7 @@
               <li class="<%= params[:controller] == 'candidates' ? 'active' : ''%>"><%= link_to 'My Candidates', candidates_path %></li>
               <li class="<%= params[:controller] == 'jobs' ? 'active' : ''%>"><%= link_to 'My Jobs', jobs_path %></li>
               <li class="<%= params[:controller] == 'companies' ? 'active' : ''%>"><%= link_to 'My Companies', companies_path %></li>
+              <li class="<%= params[:controller] == 'notes' ? 'active' : ''%>"><%= link_to 'My Notes', notes_path %></li>
         </ul>    
          <ul class="nav navbar-nav navbar-right">
             <% if !user_signed_in? %>

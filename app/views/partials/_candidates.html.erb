@@ -1,0 +1,42 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Needs Approval</th>
+      <th>Needs Feedback</th>
+      <th>Needs Interview</th>
+      <th>Final Stages</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <table>
+          <tbody>
+            <%= render @candidates.select { |c| c.status == 'needs_approval' } %>
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table>
+          <tbody>
+            <%= render @candidates.select { |c| c.status == 'needs_feedback' } %>
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table>
+          <tbody>
+            <%= render @candidates.select { |c| c.status == 'needs_interview' } %>
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table>
+          <tbody>
+            <%= render @candidates.select { |c| c.status == 'final_stages' } %>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>

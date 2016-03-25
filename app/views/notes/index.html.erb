@@ -1,0 +1,41 @@
+<%= render 'partials/alerts' %>
+
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <%= render 'form' %>
+        </div>
+     <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="page-sub-title textcenter">
+          <h2 class="page-header">Manage Notes <%= link_to 'Create New',  new_note_path, class:'btn btn-success pull-right'%></h2> 
+        </div><!-- end .page-sub-title -->
+      <% if @notes.exists? %>
+            <table class="table table-striped">
+                <tr>
+                  <th>Title</th>
+                  <th>Body</th>
+                  <th>Candidate</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+              </tr>
+              <% @notes.each do |note| %>
+                <tr>
+                    <td><%= note.title %></td>
+                    <td><%= note.body %></td>
+                    <td><%= note.candidate.name %></td>
+                   <td><%= link_to 'Edit', edit_note_path(note), class: 'btn btn-primary' %></td>
+                   <td><%= link_to 'Delete', note_path(note), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
+                </tr>
+            <% end %>
+            </table>
+            <%= will_paginate @notes %>
+            <% else %>
+                <p>There are no notes</p>
+            <% end %>
+        </div>
+      </div>
+      </div><!-- end .col-md-6 col-sm-6 col-xs-6 -->
+  </div><!-- Closes row -->
+</div><!-- Closes container -->
+</section>

@@ -60,7 +60,8 @@ class CompaniesController < ApplicationController
 
   def setup_companies
     @companies = Company.all.order(created_at: :desc).paginate(per_page: 10, page: params[:page])
-        @company ||= Company.new
+    @company ||= Company.new
+    @location ||= Location.new
   end
   
   def set_company
@@ -68,6 +69,6 @@ class CompaniesController < ApplicationController
   end
   
   def company_params
-    params.require(:company).permit(:name, :city, :notes)
+    params.require(:company).permit(:name, :location_id)
   end
 end

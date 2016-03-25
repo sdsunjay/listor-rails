@@ -1,10 +1,10 @@
 class CandidatesController < ApplicationController
 
  before_action :authenticate_user!
- before_action :set_candidate, only: [:show, :edit, :update]
+ before_action :set_candidate, only: [:show, :edit, :update, :destroy]
 
   def index
-      setup_candidates 
+      @candidates = Candidate.where(user_id: current_user.id).order(created_at: :desc).paginate(per_page: 10, page: params[:page])
   end
 
   def show
@@ -25,8 +25,7 @@ class CandidatesController < ApplicationController
       redirect_to candidates_path
     else
         flash[:notice] = 'Candidate Not Created'
-        setup_candidates
-        render action: 'index'
+        render 'new'
     end
   end
 
@@ -59,15 +58,11 @@ class CandidatesController < ApplicationController
   def set_candidate
     @candidate = Candidate.find(params[:id])
   end
-
-  def setup_candidates
-        @candidates = Candidate.all.order(created_at: :desc).paginate(per_page: 10, page: params[:page])
-        @candidate ||= Candidate.new
-  end
+  
   def candidate_params
     params
     .require(:candidate)
-    .permit(:name, :email, :status, :comments, :user_id, job_attributes: [:id], submission_attributes: [:id])
+    .permit(:name, :email, :phone, :status, :about, :image, :linkedin_url, :facebook_url, :user_id, job_attributes: [:id], submission_attributes: [:id])
     .merge(user_id: current_user.id)
   end
 end

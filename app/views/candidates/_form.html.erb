@@ -10,7 +10,20 @@
         <%= f.telephone_field :phone, class: 'form-control', placeholder: 'Telephone Number' %>
     </div>
     <div class="form-group">
-        <%= f.select :status, options_for_select([['Needs Approval', 'needs_approval'], ['Needs Feedback', 'needs_feedback'], ['Needs Interview', 'needs_interview'], ['Final Stages', 'final_stages']]) ,{include_blank: 'Select Status (not required)'}, class: 'form-control' %>
+        <%= f.text_field :about, class: 'form-control', placeholder: 'About Me' %>
+    </div>
+    <div class="form-group">
+        <%= f.url_field :linkedin_link, class: 'form-control', placeholder: 'LinkedIn URL' %>
+    </div>
+    <div class="form-group">
+        <%= f.url_field :facebook_link, class: 'form-control', placeholder: 'Website URL' %>
+    </div>
+    <div class="form-group">
+        <%= f.label :image %>
+        <%= f.file_field :image, class: 'form-control'%>
+    </div>
+    <div class="form-group">
+        <%= f.select :status, options_for_select([['Needs Approval', 'needs_approval'], ['Needs Feedback', 'needs_feedback'], ['Needs Interview', 'needs_interview'], ['Final Stages', 'final_stages']]) ,{include_blank: 'Select Status'}, class: 'form-control' %>
     </div>
     <div class="form-group">
         <%= f.select :jobs, Job.all.collect {|x| [x.title, x.id]}, {include_blank: 'Select Job (not required)'}, class:'form-control' %><br />
