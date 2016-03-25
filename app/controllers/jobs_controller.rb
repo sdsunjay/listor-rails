@@ -26,7 +26,7 @@ class JobsController < ApplicationController
     # Save the job
     if @job.save
       flash[:notice] = 'Job Created'
-      redirect_to root_path
+      redirect_to jobs_path
     else
         flash[:notice] = 'Job Not Created'
         setup_jobs
@@ -66,10 +66,6 @@ class JobsController < ApplicationController
         @submission.candidate_id = @candidate.id
         if @submission.save
           if @job.save
-            # text the driver the passenger's name and phone number
-            # TODO include link to passenger's profile
-            # send_connect_msg(current_user, @job.user.phone)
-            #jobStatusModifierJob.perform_later
             flash[:notice] = 'Candidate added'
           else
             flash[:alert] = "Unable to update job"
@@ -78,7 +74,7 @@ class JobsController < ApplicationController
           flash[:alert] = "Unable to add candidate"
         end
       else
-        flash[:alert] = "You cannot be" 
+        flash[:alert] = "Job is closed" 
       end
     redirect_to jobs_path
   end
@@ -90,7 +86,7 @@ class JobsController < ApplicationController
   end
   
   def setup_jobs
-        @jobs = Job.all.order(created_at: :desc).paginate(per_page: 10, page: params[:page])
+        @jobs = Job.where(user_id: current_user.id).order(created_at: :desc).paginate(per_page: 10, page: params[:page])
         @job ||= Job.new
   end
   
