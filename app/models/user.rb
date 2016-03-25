@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   has_many :jobs
   has_many :candidates
+  belongs_to :company
 end
