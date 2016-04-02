@@ -22,12 +22,9 @@ development:
 $ rake db:migrate
 $ rails s
 ```
-```
-production:
-  secret_token: SOMETOKEN 
-  secret_key_base: SOMEKEY
-```
-
+### Docker
+[Install Docker](https://docs.docker.com/engine/installation/)
+#### Start Docker
 ```
 $ cd ~/listor-rails
 $ mv config/docker.database.yml config/database.yml
@@ -35,7 +32,8 @@ $ docker build .
 $ docker-compose run web rake db:create db:setup
 $ docker-compose up
 
-### To stop Docker
+#### Stop Docker
+```
 $ docker-compose down
 $ docker rmi -f $(docker images -q)
 ```
@@ -43,6 +41,7 @@ $ docker rmi -f $(docker images -q)
 ### Technologies used
 
 - Ruby On Rails
-- Devise for authentication
+- Devise for Authentication
+- Docker
 
 
