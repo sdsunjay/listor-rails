@@ -25,6 +25,7 @@ $ rails s
 
 ### Docker
 [Install Docker](https://docs.docker.com/engine/installation/)
+
 #### Start Docker
 ```
 $ cd ~/listor-rails
@@ -35,7 +36,6 @@ $ docker-compose up
 ```
 
 #### Stop Docker
-
 ```
 $ docker-compose down
 $ docker rmi -f $(docker images -q)
