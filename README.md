@@ -29,7 +29,7 @@ $ rails s
 #### Start Docker
 ```
 $ cd ~/listor-rails
-$ mv config/docker.database.yml config/database.yml
+$ mv config/database.docker.yml config/database.yml
 $ docker build . 
 $ docker-compose run web rake db:create db:setup
 $ docker-compose up
